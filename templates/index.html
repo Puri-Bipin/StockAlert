@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Stock Alert</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <header>
+      <h1>Stock Alert</h1>
+    </header>
+
+    <div class="form-container">
+      <form id="my-form" method="POST" action="/submit">
+
+
+        <label for="stock-ticker">Stock Symbol:</label>
+        <input type="text" id="stock-ticker" name="stock-ticker" required><br>
+
+        <label for="price-threshold">Price Threshold:</label>
+        <input type="number" id="price-threshold" name="price-threshold" required><br>
+
+        <label for="frequency">Frequency (in minutes):</label>
+        <input type="number" id="frequency" name="frequency" required><br>
+
+        <label for="notification-type">Notification Type:</label>
+        <select id="notification-type" name="notification-type" required>
+          <option value="">--Please choose an option--</option>
+          <option value="email">Email</option>
+          <option value="sms">SMS</option>
+        </select><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+
+      </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+      
+  </body>
+</html>
