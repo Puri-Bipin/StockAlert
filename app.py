@@ -11,8 +11,8 @@ app = Flask(__name__)
 app.config['MAIL_SERVER'] = 'smtp.mailgun.org'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'postmaster@sandbox77e12abc97b7474788242556346b5643.mailgun.org'
-app.config['MAIL_PASSWORD'] = '62bba7b1ac196984a91a178d9f26ec72-181449aa-a8609ef2'
+app.config['MAIL_USERNAME'] = 'your SMTP username provided by Mailgun'
+app.config['MAIL_PASSWORD'] = 'your SMTP password provided by Mailgun'
 
 # Initialize the mail instance
 mail = Mail(app)
@@ -97,13 +97,13 @@ def submit():
 # Function to send email notification
 def send_email(email_address, stock_ticker, price):
     with app.app_context():
-        msg = Message('Stock Alert: ' + stock_ticker, sender='alerts@sandbox77e12abc97b7474788242556346b5643.mailgun.org',
+        msg = Message('Stock Alert: ' + stock_ticker, sender='alerts@yourmailgundomain.com',
                       recipients=[email_address])
         msg.body = 'The stock price of ' + stock_ticker + ' has exceeded the threshold price of ' + str(price) + '.'
         response = requests.post(
-            'https://api.mailgun.net/v3/sandbox77e12abc97b7474788242556346b5643.mailgun.org/messages',
-            auth=('api', '60db6c0ccc6cf949f54d2b0c48c3b40f-181449aa-08a5f114'),
-            data={'from': 'alerts@sandbox77e12abc97b7474788242556346b5643.mailgun.org',
+            'https://api.mailgun.net/v3/yourmailgundomain/messages',
+            auth=('api', 'your_api_key_here'),
+            data={'from': 'alert@yourdomain.com',
                   'to': email_address,
                   'subject': 'Stock Alert: ' + stock_ticker,
                   'text': 'The stock price of ' + stock_ticker + ' has exceeded the threshold price of ' + str(price) + '.'})
